@@ -20,8 +20,7 @@ Abaixo mostro o passo a passo de como cheguei nas funções de transferência e 
 ### 1. Filtro Passa-Baixas (Woofer) - 2ª Ordem
 O circuito do filtro passa-baixas é composto por um indutor ($L$) em série e um capacitor ($C$) em paralelo com a carga ($R$). 
 
-*(Circuito do Filtro Passa-Baixas)* 
-*![Circuito Passa-Baixas](passabaixas.png)*
+*(Circuito do Filtro Passa-Baixas)* *![Circuito Passa-Baixas](passabaixas.png)*
 
 As impedâncias de cada elemento são definidas como:
 * $Z_R = R$
@@ -124,29 +123,28 @@ $$L = \frac{R}{\omega_c \left(\frac{\sqrt{2}}{2}\right)} = \frac{2R}{\sqrt{2} \o
 
 ---
 
-## Funcionamento do Código
-O código foi feito no MATLAB. O script funciona basicamente assim:
-1. Pede para o usuário digitar a Impedância ($R$) e a Frequência de Corte ($f_c$).
-2. Usa as fórmulas deduzidas para achar os valores matemáticos exatos do indutor e do capacitor.
-3. Como não dá para comprar peças com valores muito quebrados, o código procura em uma lista de componentes comerciais e acha os mais próximos dos teóricos.
-4. Calcula a diferença de erro (%) e mostra o quanto a frequência vai sair do ideal na prática.
-5. Usa a função `tf` para criar as funções de transferência e plota os gráficos de Bode para comparar o ideal com o real.
+## Metodologia e Escolha dos Componentes
+O processo de dimensionamento dos filtros seguiu os seguintes passos:
+1. Definição dos parâmetros iniciais: Impedância ($R$) e Frequência de Corte ($f_c$).
+2. Uso das fórmulas deduzidas para encontrar os valores matemáticos exatos do indutor e do capacitor.
+3. Como não é possível encontrar componentes com esses valores exatos no mercado, foi feita uma busca na tabela de valores comerciais padronizados para escolher as peças mais próximas.
+4. Cálculo da diferença de erro (%) para avaliar o quanto a frequência de corte se deslocaria na prática com essas peças reais.
 
 ## Análise dos Resultados
-*(Insira a imagem do seu gráfico de simulação aqui substituindo esta linha por: `![Gráfico de Bode](caminho/para/imagem_bode.png)`)*
+*(Insira a imagem do seu gráfico de simulação aqui substituindo esta linha por: `![Gráfico de Bode](grafico.png)`)*
 
-Simulando com $R$ = **8 Ω** e $f_c$ = **2000 Hz**, chegamos nos seguintes resultados:
+Abaixo apresento o comparativo considerando os cálculos para $R$ = **8 Ω** e $f_c$ = **2000 Hz**:
 
 * Para o **Indutor ($L$)**, o valor ideal calculado foi de **0.900 mH**, mas o comercial mais próximo escolhido foi de **0.820 mH** (erro de **8.89%**).
 * Para o **Capacitor ($C$)**, o valor ideal era **7.030 µF**, e o comercial usado foi **6.800 µF** (erro de **3.27%**).
 * Com essa troca de peças, a **Frequência de Corte ($f_c$)** real do circuito mudou de **2000 Hz** para **2129.57 Hz** (erro de **6.48%**).
 
 ## Discussão e Problemas Encontrados
-O maior problema na hora de montar filtros passivos é que os valores calculados na teoria quase nunca existem para comprar prontos. Arredondar para os componentes comerciais mais próximos fez a nossa frequência de corte pular de **2000 Hz** para **2129.57 Hz**, gerando um erro de **6.48%**.
+O principal desafio prático na montagem de filtros passivos é que os valores teóricos raramente estão disponíveis para compra. O arredondamento para os componentes comerciais mais próximos deslocou a nossa frequência de corte de **2000 Hz** para **2129.57 Hz**, gerando um erro de **6.48%**.
 
-Pensando em áudio, porém, essa diferença não estraga o sistema. A mudança afeta só uma faixa de uns 130 Hz bem na transição, o que é praticamente impossível de perceber de ouvido. Além disso, os próprios alto-falantes têm pequenas variações de fabricação e curvas de resposta irregulares, o que acaba meio que escondendo essas diferenças do filtro.
+Em um sistema de áudio, no entanto, essa diferença não chega a comprometer o funcionamento. A alteração ocorre em uma faixa de aproximadamente 130 Hz na região de transição, sendo praticamente imperceptível na prática. Além disso, as próprias variações de fabricação e as curvas de resposta dos alto-falantes ajudam a mascarar esses pequenos desvios do filtro.
 
 ## Conclusões
-O projeto atingiu seu objetivo. Deu para estruturar e validar na mão toda a matemática dos filtros Butterworth de 2ª ordem, e o script ajudou bastante a simular e comparar os resultados rapidinho. 
+O projeto cumpriu seu objetivo. Foi possível estruturar e validar o equacionamento dos filtros Butterworth de 2ª ordem a partir da análise de circuitos.
 
-A parte prática deixa claro que, por mais que a teoria nos dê os números exatos, montar um circuito de verdade exige adaptação, já que a gente fica dependente do que tem na prateleira. Usar valores padronizados de mercado resolveu bem o problema e provou ser uma solução prática que não tira a qualidade do som final da caixa.
+A etapa prática demonstra que, embora a teoria forneça números exatos, a montagem de um circuito real exige adaptação aos componentes disponíveis no mercado. O uso de valores padronizados provou ser uma solução eficaz, garantindo o funcionamento correto do projeto sem prejudicar a qualidade final do áudio.
