@@ -125,7 +125,7 @@ $$L = \frac{R}{\omega_c \left(\frac{\sqrt{2}}{2}\right)} = \frac{2R}{\sqrt{2} \o
 ---
 
 ## Funcionamento do Código
-O código foi feito no MATLAB/Octave. O script funciona basicamente assim:
+O código foi feito no MATLAB. O script funciona basicamente assim:
 1. Pede para o usuário digitar a Impedância ($R$) e a Frequência de Corte ($f_c$).
 2. Usa as fórmulas deduzidas para achar os valores matemáticos exatos do indutor e do capacitor.
 3. Como não dá para comprar peças com valores muito quebrados, o código procura em uma lista de componentes comerciais e acha os mais próximos dos teóricos.
