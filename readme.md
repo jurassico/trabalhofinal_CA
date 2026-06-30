@@ -20,7 +20,7 @@ Abaixo mostro o passo a passo de como cheguei nas funções de transferência e 
 ### 1. Filtro Passa-Baixas (Woofer) - 2ª Ordem
 O circuito do filtro passa-baixas é composto por um indutor ($L$) em série e um capacitor ($C$) em paralelo com a carga ($R$). 
 
-*(Circuito do Filtro Passa-Baixas)* ![Circuito Passa-Baixas](passabaixas.png)
+*(Circuito do Filtro Passa-Baixas)* ![Circuito Passa-Baixas](Imagens/passabaixas.png)
 
 As impedâncias de cada elemento são definidas como:
 * $Z_R = R$
@@ -66,7 +66,7 @@ A partir disso, chegamos nas seguintes relações para o Passa-Baixas:
 ### 2. Filtro Passa-Altas (Tweeter) - 2ª Ordem
 O circuito do filtro passa-altas utiliza um capacitor ($C$) em série e um indutor ($L$) em paralelo com a carga ($R$).
 
-*(Circuito do Filtro Passa-Altas)* ![Circuito Passa-Altas](passaaltas.png)
+*(Circuito do Filtro Passa-Altas)* ![Circuito Passa-Altas](Imagens/passaaltas.png)
 
 A impedância do ramo paralelo ($Z_p$) formado pelo indutor e a carga é:
 
@@ -144,7 +144,7 @@ Abaixo, o comparativo considerando os cálculos para $R$ = 8 Ω e $f_c$ = 2000 H
 * Para o **Capacitor ($C$)**, o valor ideal era 7.030 µF, e o comercial usado foi 6.800 µF (erro de 3.27%).
 * Com essa troca de peças, a **Frequência de Corte ($f_c$)** real do circuito mudou de 2000 Hz para 2129.57 Hz (erro de 6.48%).
 
-*(Gráfico gerado pelo código comparando a resposta Ideal vs. Real)* ![Gráfico de Bode Passa-Baixas](bode1.png) ![Gráfico de Bode Passa-Baixas](bode2.png)
+*(Gráfico gerado pelo código comparando a resposta Ideal vs. Real)* ![Gráfico de Bode Passa-Baixas](Imagens/bode1.png) ![Gráfico de Bode Passa-Baixas](Imagens/bode2.png)
 
 ## Análise Crítica
 O principal desafio prático na montagem de filtros passivos é que os valores teóricos raramente estão disponíveis para compra. Conforme quantificado na seção anterior, o arredondamento para os componentes padronizados deslocou a nossa frequência de corte em aproximadamente 130 Hz (de 2000 Hz para 2129.57 Hz).
