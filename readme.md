@@ -5,8 +5,8 @@
 Este repositório contém o projeto de um crossover passivo para uma caixa de som de duas vias, composta por um woofer (para baixas frequências) e um tweeter (para altas frequências). O problema central resolvido aqui é separar e direcionar as frequências corretas para cada alto-falante, garantindo uma boa qualidade de áudio e evitando danos aos componentes.
 
 Para fazer essa separação, projetei e implementei dois filtros de 2ª ordem com resposta Butterworth:
-* **Filtro Passa-Baixas (LPF):** Deixa passar os sinais graves e manda direto para o woofer.
-* **Filtro Passa-Altas (HPF):** Deixa passar os sinais agudos e manda para o tweeter.
+* **Filtro Passa-Baixas:** Deixa passar os sinais graves e manda direto para o woofer.
+* **Filtro Passa-Altas:** Deixa passar os sinais agudos e manda para o tweeter.
 
 ## Especificações e Objetivos do Projeto
 O objetivo prático é dimensionar os componentes teóricos e comerciais para que o divisor de frequências atue na faixa desejada. Os parâmetros base usados para o cálculo foram:
