@@ -20,7 +20,8 @@ Abaixo, detalha-se o passo a passo da obtenção das funções de transferência
 ### 1. Filtro Passa-Baixas (Woofer) - 2ª Ordem
 A topologia do filtro passa-baixas consiste em um indutor ($L$) em série e um capacitor ($C$) em paralelo com a carga ($R$). 
 
-*(Esquema elétrico do Filtro Passa-Baixas)* *![Esquema Passa-Baixas](C:\Users\jubs\Downloads\passabaixas.png)*
+*(Circuito do Filtro Passa-Baixas)* 
+*![Circuito Passa-Baixas](passabaixas.png)*
 
 As impedâncias de cada elemento são definidas como:
 * $Z_R = R$
@@ -66,7 +67,7 @@ Extraem-se as seguintes relações para o Passa-Baixas:
 ### 2. Filtro Passa-Altas (Tweeter) - 2ª Ordem
 A topologia do filtro passa-altas utiliza um capacitor ($C$) em série e um indutor ($L$) em paralelo com a carga ($R$).
 
-*(Esquema elétrico do Filtro Passa-Altas)* *![Esquema Passa-Altas](caminho/para/imagem_passa_altas.png)*
+  *(Circuito do Filtro Passa-Altas)* *![Circuito Passa-Altas](passaaltas.png)*
 
 A impedância do ramo paralelo ($Z_p$) formado pelo indutor e a carga é:
 
