@@ -124,7 +124,7 @@ $$L = \frac{R}{\omega_c \left(\frac{\sqrt{2}}{2}\right)} = \frac{2R}{\sqrt{2} \o
 ---
 
 ## Lógica do Programa
-O script computacional desenvolvido para o projeto tem a seguinte lógica de execução:
+O programa desenvolvido para o projeto tem a seguinte lógica:
 1. **Entrada:** Recebe os valores especificados de Impedância ($R$) e Frequência de Corte ($f_c$).
 2. **Cálculo:** Utiliza as fórmulas matemáticas deduzidas para encontrar os valores ideais exatos de $L$ e $C$.
 3. **Aproximação:** Compara os valores ideais com uma lista de componentes comerciais e seleciona os mais próximos.
@@ -135,7 +135,7 @@ O script computacional desenvolvido para o projeto tem a seguinte lógica de exe
 
 1. Ter o MATLAB e a Toolbox Control System Toolbox instalados.
 2. Baixe os arquivos deste repositório.
-3. Rode o código. Insira a Frequência de Corte e a Impedância da Carga pedidas pelo programa. O terminal imprimirá os valores ideais, os valores comerciais adotados e o erro percentual. Em seguida, a janela com o Gráfico de Bode se abrirá na tela.
+3. Rode o código. Insira a Frequência de Corte e a Impedância da Carga pedidas pelo programa. O terminal imprimirá os valores ideais, os valores comerciais adotados e o erro percentual. Em seguida, a janela com os Gráficos de Bode se abrirá na tela. São duas abas, uma para cada filtro.
 
 ## Análise dos Resultados
 Abaixo, o comparativo considerando os cálculos para $R$ = 8 Ω e $f_c$ = 2000 Hz:
@@ -144,7 +144,7 @@ Abaixo, o comparativo considerando os cálculos para $R$ = 8 Ω e $f_c$ = 2000 H
 * Para o **Capacitor ($C$)**, o valor ideal era 7.030 µF, e o comercial usado foi 6.800 µF (erro de 3.27%).
 * Com essa troca de peças, a **Frequência de Corte ($f_c$)** real do circuito mudou de 2000 Hz para 2129.57 Hz (erro de 6.48%).
 
-*(Gráfico gerado pelo código comparando a resposta Ideal vs. Real)* ![Gráfico de Bode](grafico.png)
+*(Gráfico gerado pelo código comparando a resposta Ideal vs. Real)* ![Gráfico de Bode Passa-Baixas](bode1.png) ![Gráfico de Bode Passa-Baixas](bode2.png)
 
 ## Análise Crítica
 O principal desafio prático na montagem de filtros passivos é que os valores teóricos raramente estão disponíveis para compra. Conforme quantificado na seção anterior, o arredondamento para os componentes padronizados deslocou a nossa frequência de corte em aproximadamente 130 Hz (de 2000 Hz para 2129.57 Hz).
