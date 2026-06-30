@@ -4,7 +4,7 @@
 ## Sobre o Projeto
 Este repositório contém o projeto de um crossover passivo para uma caixa de som de duas vias, composta por um woofer (para baixas frequências) e um tweeter (para altas frequências). O objetivo do projeto é separar e direcionar as frequências certas para cada alto-falante, garantindo uma boa qualidade de áudio e protegendo os componentes.
 
-Para fazer essa separação, projetei e implementei dois filtros de 2ª ordem com resposta Butterworth:
+Para fazer essa separação, foram projetados dois filtros de 2ª ordem com resposta Butterworth:
 * **Filtro Passa-Baixas (LPF):** Deixa passar os sinais graves e manda direto para o woofer.
 * **Filtro Passa-Altas (HPF):** Deixa passar os sinais agudos e manda para o tweeter.
 
@@ -15,7 +15,7 @@ Os parâmetros base usados para o cálculo dos componentes foram:
 * **Fator de Qualidade ($Q$):** $\frac{\sqrt{2}}{2} \approx 0.7071$ (característico do filtro Butterworth).
 
 ## Equacionamento e Fórmulas de Projeto
-Abaixo mostro o passo a passo de como cheguei nas funções de transferência e nas fórmulas finais usando a análise de impedâncias no domínio da frequência.
+Abaixo, o passo a passo de como chegar nas funções de transferência e nas fórmulas finais usando a análise de impedâncias no domínio da frequência.
 
 ### 1. Filtro Passa-Baixas (Woofer) - 2ª Ordem
 O circuito do filtro passa-baixas é composto por um indutor ($L$) em série e um capacitor ($C$) em paralelo com a carga ($R$). 
@@ -105,20 +105,24 @@ A partir disso, obtemos relações idênticas às do Passa-Baixas:
 ---
 
 ### 3. Fórmulas de Projeto (Cálculo de L e C)
-Como deu para ver nas contas ali em cima, as equações dos componentes são as mesmas para os dois circuitos. Sabendo que em um filtro Butterworth o fator de qualidade é $Q = \frac{\sqrt{2}}{2}$:
+As equações dos componentes são as mesmas para os dois circuitos. Sabendo que em um filtro Butterworth o fator de qualidade é $Q = \frac{\sqrt{2}}{2}$:
 
 **Cálculo do Capacitor ($C$):**
 Substituindo $Q$ na relação $C = \frac{Q}{\omega_c R}$:
+
 $$C = \frac{\frac{\sqrt{2}}{2}}{\omega_c R} \Rightarrow C = \frac{\sqrt{2}}{2 \omega_c R}$$
 
 **Cálculo do Indutor ($L$):**
 Isolando $L$ da equação $\omega_c^2 = \frac{1}{LC}$:
+
 $$L = \frac{1}{\omega_c^2 C}$$
 
 Substituindo a fórmula de $C$ que achamos antes:
+
 $$L = \frac{1}{\omega_c^2 \left(\frac{Q}{\omega_c R}\right)} = \frac{R}{\omega_c Q}$$
 
 Substituindo o valor de $Q = \frac{\sqrt{2}}{2}$:
+
 $$L = \frac{R}{\omega_c \left(\frac{\sqrt{2}}{2}\right)} = \frac{2R}{\sqrt{2} \omega_c} \Rightarrow L = \frac{\sqrt{2} R}{\omega_c}$$
 
 ---
@@ -127,13 +131,13 @@ $$L = \frac{R}{\omega_c \left(\frac{\sqrt{2}}{2}\right)} = \frac{2R}{\sqrt{2} \o
 O processo de dimensionamento dos filtros seguiu os seguintes passos:
 1. Definição dos parâmetros iniciais: Impedância ($R$) e Frequência de Corte ($f_c$).
 2. Uso das fórmulas deduzidas para encontrar os valores matemáticos exatos do indutor e do capacitor.
-3. Como não é possível encontrar componentes com esses valores exatos no mercado, foi feita uma busca na tabela de valores comerciais padronizados para escolher as peças mais próximas.
+3. Como não é possível encontrar componentes com esses valores exatos no mercado, foi feita uma busca na tabela de valores comerciais para escolher as peças mais próximas.
 4. Cálculo da diferença de erro (%) para avaliar o quanto a frequência de corte se deslocaria na prática com essas peças reais.
 
 ## Análise dos Resultados
-*(Insira a imagem do seu gráfico de simulação aqui substituindo esta linha por: `![Gráfico de Bode](grafico.png)`)*
+*([Gráfico de Bode](grafico.png))*
 
-Abaixo apresento o comparativo considerando os cálculos para $R$ = **8 Ω** e $f_c$ = **2000 Hz**:
+Abaixo, o comparativo considerando os cálculos para $R$ = **8 Ω** e $f_c$ = **2000 Hz**:
 
 * Para o **Indutor ($L$)**, o valor ideal calculado foi de **0.900 mH**, mas o comercial mais próximo escolhido foi de **0.820 mH** (erro de **8.89%**).
 * Para o **Capacitor ($C$)**, o valor ideal era **7.030 µF**, e o comercial usado foi **6.800 µF** (erro de **3.27%**).
