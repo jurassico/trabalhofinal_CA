@@ -9,7 +9,7 @@ Para fazer essa separação, projetei e implementei dois filtros de 2ª ordem co
 * **Filtro Passa-Altas (HPF):** Deixa passar os sinais agudos e manda para o tweeter.
 
 ## Especificações e Objetivos do Projeto
-O objetivo prático é dimensionar os componentes ideais e comerciais para que o divisor de frequências atue na faixa desejada. Os parâmetros base usados para o cálculo foram:
+O objetivo prático é dimensionar os componentes teóricos e comerciais para que o divisor de frequências atue na faixa desejada. Os parâmetros base usados para o cálculo foram:
 * **Frequência de Corte ($f_c$):** 2000 Hz
 * **Impedância de Carga ($R$):** 8 Ω
 * **Fator de Qualidade ($Q$):** $\frac{\sqrt{2}}{2} \approx 0.7071$ (característico do filtro Butterworth).
@@ -20,7 +20,7 @@ Abaixo mostro o passo a passo de como cheguei nas funções de transferência e 
 ### 1. Filtro Passa-Baixas (Woofer) - 2ª Ordem
 O circuito do filtro passa-baixas é composto por um indutor ($L$) em série e um capacitor ($C$) em paralelo com a carga ($R$). 
 
-*(Circuito do Filtro Passa-Baixas)* ![Circuito Passa-Baixas](passabaixas.png)
+*(Circuito do Filtro Passa-Baixas)* ![Circuito Passa-Baixas](Imagens/passabaixas.png)
 
 As impedâncias de cada elemento são definidas como:
 * $Z_R = R$
@@ -66,7 +66,7 @@ A partir disso, chegamos nas seguintes relações para o Passa-Baixas:
 ### 2. Filtro Passa-Altas (Tweeter) - 2ª Ordem
 O circuito do filtro passa-altas utiliza um capacitor ($C$) em série e um indutor ($L$) em paralelo com a carga ($R$).
 
-*(Circuito do Filtro Passa-Altas)* ![Circuito Passa-Altas](passaaltas.png)
+*(Circuito do Filtro Passa-Altas)* ![Circuito Passa-Altas](Imagens/passaaltas.png)
 
 A impedância do ramo paralelo ($Z_p$) formado pelo indutor e a carga é:
 
@@ -119,39 +119,40 @@ Substituindo a fórmula de $C$ que achamos antes:
 $$L = \frac{1}{\omega_c^2 \left(\frac{Q}{\omega_c R}\right)} = \frac{R}{\omega_c Q}$$
 
 Substituindo o valor de $Q = \frac{\sqrt{2}}{2}$:
+
 $$L = \frac{R}{\omega_c \left(\frac{\sqrt{2}}{2}\right)} = \frac{2R}{\sqrt{2} \omega_c} \Rightarrow L = \frac{\sqrt{2} R}{\omega_c}$$
 
 ---
 
 ## Lógica do Programa
 O programa desenvolvido para o projeto tem a seguinte lógica:
-1. **Entrada:** Recebe os valores especificados de Impedância ($R$) e Frequência de Corte ($f_c$).
-2. **Cálculo:** Utiliza as fórmulas matemáticas deduzidas para encontrar os valores ideais exatos de $L$ e $C$.
-3. **Aproximação:** Compara os valores ideais com uma lista de componentes comerciais e seleciona os mais próximos.
-4. **Análise de Erro:** Calcula a nova frequência de corte com base nas peças reais e verifica a diferença percentual.
-5. **Plotagem:** Gera as funções de transferência e plota os Gráficos de Bode comparativos (Curva Ideal vs. Curva Real).
+1. Entrada: Recebe os valores especificados de Impedância ($R$) e Frequência de Corte ($f_c$).
+2. Cálculo: Utiliza as fórmulas matemáticas deduzidas para encontrar os valores teóricos exatos de $L$ e $C$.
+3. Aproximação: Compara os valores teóricos com uma lista de componentes comerciais e seleciona os mais próximos.
+4. Análise de Erro: Calcula a nova frequência de corte com base nas peças reais e verifica a diferença percentual.
+5. Plotagem: Gera as funções de transferência e plota os Gráficos de Bode comparativos (Curva Teórica vs. Curva Real).
 
 ## Como Executar o Código
 
 1. Ter o MATLAB e a Toolbox Control System Toolbox instalados.
 2. Baixe os arquivos deste repositório.
-3. Rode o código. Insira a Frequência de Corte e a Impedância da Carga pedidas pelo programa. O terminal imprimirá os valores ideais, os valores comerciais adotados e o erro percentual. Em seguida, a janela com os Gráficos de Bode se abrirá na tela. São duas abas, uma para cada filtro.
+3. Rode o código. Insira a Frequência de Corte e a Impedância da Carga pedidas pelo programa. O terminal imprimirá os valores teóricos, os valores comerciais adotados e o erro percentual. Em seguida, a janela com os Gráficos de Bode se abrirá na tela. São duas abas, uma para cada filtro.
 
 ## Análise dos Resultados
 Abaixo, o comparativo considerando os cálculos para $R$ = 8 Ω e $f_c$ = 2000 Hz:
 
-* Para o **Indutor ($L$)**, o valor ideal calculado foi de 0.900 mH, mas o comercial mais próximo escolhido foi de 0.820 mH (erro de 8.89%).
-* Para o **Capacitor ($C$)**, o valor ideal era 7.030 µF, e o comercial usado foi 6.800 µF (erro de 3.27%).
+* Para o **Indutor ($L$)**, o valor teórico calculado foi de 0.900 mH, mas o comercial mais próximo escolhido foi de 0.820 mH (erro de 8.89%).
+* Para o **Capacitor ($C$)**, o valor teórico era 7.030 µF, e o comercial usado foi 6.800 µF (erro de 3.27%).
 * Com essa troca de peças, a **Frequência de Corte ($f_c$)** real do circuito mudou de 2000 Hz para 2129.57 Hz (erro de 6.48%).
 
-*(Gráfico gerado pelo código comparando a resposta Ideal vs. Real)* ![Gráfico de Bode Passa-Baixas](bode1.png) ![Gráfico de Bode Passa-Baixas](bode2.png)
+*(Gráfico gerado pelo código comparando a resposta Teórica vs Real)* ![Gráfico de Bode Passa-Baixas](Imagens/bode1.png) ![Gráfico de Bode Passa-Altas](Imagens/bode2.png)
 
 ## Análise Crítica
-O principal desafio prático na montagem de filtros passivos é que os valores teóricos raramente estão disponíveis para compra. Conforme quantificado na seção anterior, o arredondamento para os componentes padronizados deslocou a nossa frequência de corte em aproximadamente 130 Hz (de 2000 Hz para 2129.57 Hz).
+O principal desafio prático na montagem de filtros passivos é que os valores teóricos raramente estão disponíveis para compra. O arredondamento para os componentes padronizados deslocou a nossa frequência de corte em aproximadamente 130 Hz (de 2000 Hz para 2129.57 Hz).
 
-Em um sistema de áudio, no entanto, qual o impacto prático dessa mudança? Essa diferença não chega a comprometer o funcionamento e **não seria audível**. A alteração ocorre em uma faixa muito estreita na região de transição. Além disso, as próprias variações de fabricação e as curvas de resposta naturais dos alto-falantes ajudam a mascarar completamente esses pequenos desvios do filtro no mundo real.
+Em um sistema físico, essa diferença não chega a ser audível nem compromete o funcionamento. O pequeno desvio na banda de transição acaba sendo mascarado pelas próprias tolerâncias de projeto e pela resposta natural dos alto-falantes.
 
 ## Conclusões
-O projeto atingiu seu objetivo fundamental com sucesso. Foi possível estruturar, equacionar e validar os filtros Butterworth de 2ª ordem a partir da análise matemática de circuitos e da simulação. 
+O projeto atingiu seu objetivo. Foi possível estruturar, equacionar e validar os filtros Butterworth de 2ª ordem a partir da análise matemática de circuitos e da simulação. 
 
-A etapa prática trouxe o maior desafio do projeto: adaptar números matematicamente perfeitos à limitação física das peças eletrônicas. Essa limitação ensinou uma lição valiosa sobre a engenharia do mundo real, mostrando que um bom projeto não é aquele que usa números impossíveis, mas sim aquele que sabe utilizar peças padronizadas de mercado garantindo que a qualidade e a funcionalidade do sistema permaneçam intactas.
+Na prática, o desafio do projeto foi a adequação dos componentes. A análise mostrou que o uso de valores comerciais, em vez dos calculados teoricamente, causa somente uma pequena variação na frequência de corte.
