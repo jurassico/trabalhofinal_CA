@@ -2,52 +2,52 @@
 **Júlia Emanuelle Ulrich** -- Engenharia de Computação
 
 ## Sobre o Projeto
-Este repositório contém o projeto de um crossover passivo para uma caixa de som de duas vias, composta por um woofer (para baixas frequências) e um tweeter (para altas frequências). O objetivo do projeto é separar e direcionar as frequências corretas para cada transdutor, garantindo máxima fidelidade de áudio e a proteção dos componentes operacionais.
+Este repositório contém o projeto de um crossover passivo para uma caixa de som de duas vias, composta por um woofer (para baixas frequências) e um tweeter (para altas frequências). O problema central resolvido aqui é separar e direcionar as frequências corretas para cada alto-falante, garantindo uma boa qualidade de áudio e evitando danos aos componentes.
 
-Para realizar essa separação, foram projetados e implementados dois filtros de 2ª ordem com resposta do tipo Butterworth:
-* **Filtro Passa-Baixas (LPF):** Permite a passagem dos sinais graves, direcionando-os ao woofer.
-* **Filtro Passa-Altas (HPF):** Permite a passagem dos sinais agudos, direcionando-os ao tweeter.
+Para fazer essa separação, projetei e implementei dois filtros de 2ª ordem com resposta Butterworth:
+* **Filtro Passa-Baixas (LPF):** Deixa passar os sinais graves e manda direto para o woofer.
+* **Filtro Passa-Altas (HPF):** Deixa passar os sinais agudos e manda para o tweeter.
 
-## Especificações do Projeto
-Os parâmetros base utilizados para o cálculo dos componentes foram:
-* **Frequência de Corte ($f_c$):** **2000 Hz**
-* **Impedância de Carga ($R$):** **8 Ω**
+## Especificações e Objetivos do Projeto
+O objetivo prático é dimensionar os componentes ideais e comerciais para que o divisor de frequências atue na faixa desejada. Os parâmetros base usados para o cálculo foram:
+* **Frequência de Corte ($f_c$):** 2000 Hz
+* **Impedância de Carga ($R$):** 8 Ω
 * **Fator de Qualidade ($Q$):** $\frac{\sqrt{2}}{2} \approx 0.7071$ (característico do filtro Butterworth).
 
 ## Equacionamento e Fórmulas de Projeto
-Abaixo, detalha-se o passo a passo da obtenção das funções de transferência e das fórmulas finais de projeto, baseando-se na análise de impedâncias no domínio da frequência.
+Abaixo mostro o passo a passo de como cheguei nas funções de transferência e nas fórmulas finais usando a análise de impedâncias no domínio da frequência.
 
 ### 1. Filtro Passa-Baixas (Woofer) - 2ª Ordem
-A topologia do filtro passa-baixas consiste em um indutor ($L$) em série e um capacitor ($C$) em paralelo com a carga ($R$). 
+O circuito do filtro passa-baixas é composto por um indutor ($L$) em série e um capacitor ($C$) em paralelo com a carga ($R$). 
 
-*(Esquema elétrico do Filtro Passa-Baixas)* *![Esquema Passa-Baixas](C:\Users\jubs\Downloads\passabaixas.png)*
+*(Circuito do Filtro Passa-Baixas)* ![Circuito Passa-Baixas](passabaixas.png)
 
 As impedâncias de cada elemento são definidas como:
 * $Z_R = R$
 * $Z_L = j\omega L$
 * $Z_C = \frac{1}{j\omega C}$
 
-A impedância equivalente ($Z_p$) do ramo paralelo (capacitor e carga) é dada por:
+A impedância equivalente ($Z_p$) do ramo paralelo (capacitor e carga) é:
 
 $$Z_p = Z_C // R = \frac{Z_C \cdot R}{Z_C + R} = \frac{(1/j\omega C) \cdot R}{(1/j\omega C) + R} \cdot \left(\frac{j\omega C}{j\omega C}\right)$$
 
 $$Z_p = \frac{R}{1 + j\omega C R}$$
 
-Aplicando a regra do divisor de tensão, a função de transferência $H(j\omega)$ resulta em:
+Aplicando a regra do divisor de tensão, a função de transferência $H(j\omega)$ fica assim:
 
 $$H(j\omega) = \frac{V_{saida}}{V_{entrada}} = \frac{Z_p}{Z_L + Z_p}$$
 
-Substituindo $Z_p$ e $Z_L$ e manipulando algebricamente a equação:
+Substituindo $Z_p$ e $Z_L$ e dando uma ajeitada na equação:
 
 $$H(j\omega) = \frac{\frac{R}{1 + j\omega C R}}{j\omega L + \frac{R}{1 + j\omega C R}} \cdot \left(\frac{1 + j\omega C R}{1 + j\omega C R}\right)$$
 
 $$H(j\omega) = \frac{R}{j\omega L (1 + j\omega C R) + R} = \frac{R}{j\omega L + (j\omega)^2 L C R + R}$$
 
-Para obter a forma canônica, divide-se o numerador e o denominador por $R$:
+Para chegar no formato padrão, dividimos o numerador e o denominador por $R$:
 
 $$H(j\omega) = \frac{R/R}{\frac{j\omega L}{R} + \frac{(j\omega)^2 L C R}{R} + \frac{R}{R}} = \frac{1}{1 + j\omega \frac{L}{R} + (j\omega)^2 L C}$$
 
-E, em seguida, divide-se os termos por $LC$:
+E, em seguida, dividimos os termos por $LC$:
 
 $$H(j\omega) = \frac{1/LC}{\frac{1}{LC} + j\omega \frac{L/R}{LC} + \frac{(j\omega)^2 LC}{LC}} = \frac{1/LC}{(j\omega)^2 + j\omega \frac{1}{CR} + 1/LC}$$
 
@@ -55,7 +55,7 @@ Comparando com a equação padrão do filtro passa-baixas de 2ª ordem:
 
 $$H(j\omega) = \frac{\omega_c^2}{(j\omega)^2 + \frac{\omega_c}{Q}(j\omega) + \omega_c^2}$$
 
-Extraem-se as seguintes relações para o Passa-Baixas:
+A partir disso, chegamos nas seguintes relações para o Passa-Baixas:
 
 **1)** $\omega_c^2 = \frac{1}{LC} \Rightarrow \omega_c = \frac{1}{\sqrt{LC}}$
 
@@ -64,9 +64,9 @@ Extraem-se as seguintes relações para o Passa-Baixas:
 ---
 
 ### 2. Filtro Passa-Altas (Tweeter) - 2ª Ordem
-A topologia do filtro passa-altas utiliza um capacitor ($C$) em série e um indutor ($L$) em paralelo com a carga ($R$).
+O circuito do filtro passa-altas utiliza um capacitor ($C$) em série e um indutor ($L$) em paralelo com a carga ($R$).
 
-*(Esquema elétrico do Filtro Passa-Altas)* *![Esquema Passa-Altas](caminho/para/imagem_passa_altas.png)*
+*(Circuito do Filtro Passa-Altas)* ![Circuito Passa-Altas](passaaltas.png)
 
 A impedância do ramo paralelo ($Z_p$) formado pelo indutor e a carga é:
 
@@ -84,11 +84,11 @@ $$H(j\omega) = \frac{j\omega L R}{\frac{j\omega L + R}{j\omega C} + j\omega L R}
 
 $$H(j\omega) = \frac{(j\omega)^2 L C R}{R + j\omega L + (j\omega)^2 L C R}$$
 
-Dividindo o numerador e o denominador por $R$:
+Para chegar no formato padrão, dividimos o numerador e o denominador por $R$:
 
 $$H(j\omega) = \frac{(j\omega)^2 L C}{1 + j\omega \frac{L}{R} + (j\omega)^2 L C}$$
 
-E, posteriormente, dividindo por $LC$:
+E, em seguida, dividimos os termos por $LC$:
 
 $$H(j\omega) = \frac{(j\omega)^2}{\frac{1}{LC} + j\omega \frac{1}{CR} + (j\omega)^2} = \frac{(j\omega)^2}{(j\omega)^2 + j\omega \frac{1}{CR} + 1/LC}$$
 
@@ -96,7 +96,7 @@ Comparando com a forma padrão do filtro passa-altas de 2ª ordem:
 
 $$H(j\omega) = \frac{(j\omega)^2}{(j\omega)^2 + \frac{\omega_c}{Q}(j\omega) + \omega_c^2}$$
 
-Verifica-se que as relações extraídas são idênticas às do Passa-Baixas:
+A partir disso, obtemos relações idênticas às do Passa-Baixas:
 
 **1)** $\omega_c^2 = \frac{1}{LC} \Rightarrow \omega_c = \frac{1}{\sqrt{LC}}$
 
@@ -105,7 +105,7 @@ Verifica-se que as relações extraídas são idênticas às do Passa-Baixas:
 ---
 
 ### 3. Fórmulas de Projeto (Cálculo de L e C)
-Conforme demonstrado pelas deduções algébricas, as equações características para os componentes são as mesmas para ambas as topologias. Sabendo que em um filtro Butterworth o fator de qualidade é $Q = \frac{\sqrt{2}}{2}$:
+Como deu para ver nas contas ali em cima, as equações dos componentes são as mesmas para os dois circuitos. Sabendo que em um filtro Butterworth o fator de qualidade é $Q = \frac{\sqrt{2}}{2}$:
 
 **Cálculo do Capacitor ($C$):**
 Substituindo $Q$ na relação $C = \frac{Q}{\omega_c R}$:
@@ -115,7 +115,7 @@ $$C = \frac{\frac{\sqrt{2}}{2}}{\omega_c R} \Rightarrow C = \frac{\sqrt{2}}{2 \o
 Isolando $L$ da equação $\omega_c^2 = \frac{1}{LC}$:
 $$L = \frac{1}{\omega_c^2 C}$$
 
-Substituindo a fórmula de $C$ deduzida anteriormente:
+Substituindo a fórmula de $C$ que achamos antes:
 $$L = \frac{1}{\omega_c^2 \left(\frac{Q}{\omega_c R}\right)} = \frac{R}{\omega_c Q}$$
 
 Substituindo o valor de $Q = \frac{\sqrt{2}}{2}$:
@@ -123,31 +123,35 @@ $$L = \frac{R}{\omega_c \left(\frac{\sqrt{2}}{2}\right)} = \frac{2R}{\sqrt{2} \o
 
 ---
 
-## Lógica e Funcionamento do Código
-O programa computacional foi desenvolvido em ambiente MATLAB/Octave. O fluxo lógico de execução opera da seguinte maneira:
-1. **Entrada de Dados:** O sistema solicita ao usuário a inserção dos parâmetros de Impedância ($R$) e Frequência de Corte ($f_c$).
-2. **Cálculo Teórico:** O algoritmo utiliza as fórmulas deduzidas matematicamente para calcular os valores ideais exatos do indutor e do capacitor.
-3. **Busca de Valores Comerciais:** Considerando a indisponibilidade de componentes com valores fracionários arbitrários, o algoritmo realiza uma busca em vetores predefinidos (série comercial E) e utiliza a função `min(abs())` para selecionar as peças reais que mais se aproximam do cálculo teórico.
-4. **Análise de Erro:** O código quantifica a diferença percentual entre os componentes teóricos e comerciais, calculando também o impacto desse desvio na frequência de corte real do circuito.
-5. **Geração de Gráficos:** Utiliza-se a função `tf` para instanciar as funções de transferência teóricas e reais, e o comando `bode()` para gerar os diagramas comparativos.
+## Lógica do Programa
+O programa desenvolvido para o projeto tem a seguinte lógica:
+1. **Entrada:** Recebe os valores especificados de Impedância ($R$) e Frequência de Corte ($f_c$).
+2. **Cálculo:** Utiliza as fórmulas matemáticas deduzidas para encontrar os valores ideais exatos de $L$ e $C$.
+3. **Aproximação:** Compara os valores ideais com uma lista de componentes comerciais e seleciona os mais próximos.
+4. **Análise de Erro:** Calcula a nova frequência de corte com base nas peças reais e verifica a diferença percentual.
+5. **Plotagem:** Gera as funções de transferência e plota os Gráficos de Bode comparativos (Curva Ideal vs. Curva Real).
+
+## Como Executar o Código
+
+1. Ter o MATLAB e a Toolbox Control System Toolbox instalados.
+2. Baixe os arquivos deste repositório.
+3. Rode o código. Insira a Frequência de Corte e a Impedância da Carga pedidas pelo programa. O terminal imprimirá os valores ideais, os valores comerciais adotados e o erro percentual. Em seguida, a janela com os Gráficos de Bode se abrirá na tela. São duas abas, uma para cada filtro.
 
 ## Análise dos Resultados
-*(Insira a imagem do seu gráfico de simulação aqui substituindo esta linha por: `![Gráfico de Bode](caminho/para/imagem_bode.png)`)*
+Abaixo, o comparativo considerando os cálculos para $R$ = 8 Ω e $f_c$ = 2000 Hz:
 
-Abaixo, apresenta-se o comparativo de uma simulação utilizando $R$ = **8 Ω** e $f_c$ = **2000 Hz**:
+* Para o **Indutor ($L$)**, o valor ideal calculado foi de 0.900 mH, mas o comercial mais próximo escolhido foi de 0.820 mH (erro de 8.89%).
+* Para o **Capacitor ($C$)**, o valor ideal era 7.030 µF, e o comercial usado foi 6.800 µF (erro de 3.27%).
+* Com essa troca de peças, a **Frequência de Corte ($f_c$)** real do circuito mudou de 2000 Hz para 2129.57 Hz (erro de 6.48%).
 
-| Parâmetro | Valor Ideal | Valor Comercial | Erro (%) |
-| :--- | :--- | :--- | :--- |
-| **Indutor ($L$)** | **0.900 mH** | **0.820 mH** | **8.89%** |
-| **Capacitor ($C$)** | **7.030 µF** | **6.800 µF** | **3.27%** |
-| **Freq. Corte ($f_c$)**| **2000 Hz** | **2129.57 Hz** | **6.48%** |
+*(Gráfico gerado pelo código comparando a resposta Ideal vs. Real)* ![Gráfico de Bode Passa-Baixas](bode1.png) ![Gráfico de Bode Passa-Baixas](bode2.png)
 
-## Discussão e Análise Crítica
-O principal desafio prático na implementação de filtros passivos reside na restrição imposta pelos valores comerciais de componentes. Valores calculados teoricamente (como **0.900 mH** e **7.030 µF**) raramente estão disponíveis no mercado. A aproximação para os componentes padronizados mais próximos causou um deslocamento da frequência de corte de **2000 Hz** para **2129.57 Hz**, caracterizando um erro de **6.48%**.
+## Análise Crítica
+O principal desafio prático na montagem de filtros passivos é que os valores teóricos raramente estão disponíveis para compra. Conforme quantificado na seção anterior, o arredondamento para os componentes padronizados deslocou a nossa frequência de corte em aproximadamente 130 Hz (de 2000 Hz para 2129.57 Hz).
 
-Em um contexto de projeto de áudio, no entanto, essa variação não compromete o desempenho do sistema. A alteração afeta uma estreita faixa de aproximadamente 130 Hz na região de transição (crossover), sendo uma divergência praticamente imperceptível à audição humana. Adicionalmente, as próprias tolerâncias de fabricação dos alto-falantes e suas curvas naturais de resposta tendem a atenuar e mascarar variações sutis geradas pelos filtros.
+Em um sistema de áudio, no entanto, qual o impacto prático dessa mudança? Essa diferença não chega a comprometer o funcionamento e **não seria audível**. A alteração ocorre em uma faixa muito estreita na região de transição. Além disso, as próprias variações de fabricação e as curvas de resposta naturais dos alto-falantes ajudam a mascarar completamente esses pequenos desvios do filtro no mundo real.
 
 ## Conclusões
-O projeto cumpriu satisfatoriamente seus objetivos fundamentais. O equacionamento matemático para o dimensionamento dos filtros Butterworth de 2ª ordem foi estruturado e validado com sucesso, enquanto a ferramenta computacional otimizou o processo de simulação e comparação analítica.
+O projeto atingiu seu objetivo fundamental com sucesso. Foi possível estruturar, equacionar e validar os filtros Butterworth de 2ª ordem a partir da análise matemática de circuitos e da simulação. 
 
-A etapa prática do projeto evidencia que, embora o equacionamento teórico forneça as diretrizes exatas de funcionamento, a engenharia de hardware exige a adaptação perante limitações físicas e mercadológicas. O uso de valores padronizados demonstrou ser uma solução viável e eficaz, garantindo o funcionamento correto do circuito divisor de frequências sem perdas significativas de integridade no sistema final.
+A etapa prática trouxe o maior desafio do projeto: adaptar números matematicamente perfeitos à limitação física das peças eletrônicas. Essa limitação ensinou uma lição valiosa sobre a engenharia do mundo real, mostrando que um bom projeto não é aquele que usa números impossíveis, mas sim aquele que sabe utilizar peças padronizadas de mercado garantindo que a qualidade e a funcionalidade do sistema permaneçam intactas.
