@@ -126,11 +126,12 @@ $$L = \frac{R}{\omega_c \left(\frac{\sqrt{2}}{2}\right)} = \frac{2R}{\sqrt{2} \o
 
 ## Lógica do Programa
 O programa desenvolvido para o projeto tem a seguinte lógica:
-Entrada: Recebe os valores especificados de Impedância ($R$) e Frequência de Corte ($f_c$).
-Cálculo: Utiliza as fórmulas matemáticas deduzidas para encontrar os valores teóricos exatos de $L$ e $C$.
-Aproximação: Compara os valores teóricos com uma lista de componentes comerciais e seleciona os mais próximos.
-Análise de Erro: Calcula a nova frequência de corte com base nas peças reais e verifica a diferença percentual.
-Plotagem: Gera as funções de transferência e plota os Gráficos de Bode comparativos (Curva Teórica vs Curva Real).
+
+1. Entrada: Recebe os valores especificados de Impedância ($R$) e Frequência de Corte ($f_c$).
+2. Cálculo: Utiliza as fórmulas matemáticas deduzidas para encontrar os valores teóricos exatos de $L$ e $C$.
+3. Aproximação: Compara os valores teóricos com uma lista de componentes comerciais e seleciona os mais próximos.
+4. Análise de Erro: Calcula a nova frequência de corte com base nas peças reais e verifica a diferença percentual.
+5. Plotagem: Gera as funções de transferência e plota os Gráficos de Bode comparativos (Curva Teórica vs Curva Real).
 
 ## Como Executar o Código
 
