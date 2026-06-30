@@ -29,7 +29,7 @@ As impedâncias de cada elemento são definidas como:
 
 A impedância equivalente ($Z_p$) do ramo paralelo (capacitor e carga) é:
 
-$$Z_p = Z_C // R = \frac{Z_C \cdot R}{Z_C + R} = \frac{(1/j\omega C) \cdot R}{(1/j\omega C) + R} \cdot \left(\frac{j\omega C}{j\omega C}\right)$$
+$$Z_p = Z_C \parallel R = \frac{Z_C \cdot R}{Z_C + R} = \frac{(1/j\omega C) \cdot R}{(1/j\omega C) + R} \cdot \left(\frac{j\omega C}{j\omega C}\right)$$
 
 $$Z_p = \frac{R}{1 + j\omega C R}$$
 
@@ -70,7 +70,7 @@ O circuito do filtro passa-altas utiliza um capacitor ($C$) em série e um indut
 
 A impedância do ramo paralelo ($Z_p$) formado pelo indutor e a carga é:
 
-$$Z_p = Z_L // R = \frac{Z_L \cdot R}{Z_L + R} = \frac{j\omega L \cdot R}{j\omega L + R}$$
+$$Z_p = Z_L \parallel R = \frac{Z_L \cdot R}{Z_L + R} = \frac{j\omega L \cdot R}{j\omega L + R}$$
 
 Aplicando o divisor de tensão:
 
