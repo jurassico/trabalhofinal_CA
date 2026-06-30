@@ -15,10 +15,10 @@ Os parâmetros base utilizados para o cálculo dos componentes foram:
 * **Fator de Qualidade ($Q$):** $\frac{\sqrt{2}}{2} \approx 0.7071$ (característico do filtro Butterworth).
 
 ## Equacionamento e Fórmulas de Projeto
-Abaixo, detalha-se o passo a passo da obtenção das funções de transferência e das fórmulas finais de projeto, baseando-se na análise de impedâncias no domínio da frequência.
+Abaixo, detalha-se o passo a passo da obtenção das funções de transferência e das fórmulas finais de projeto, feitas com a análise de impedâncias no domínio da frequência.
 
 ### 1. Filtro Passa-Baixas (Woofer) - 2ª Ordem
-A topologia do filtro passa-baixas consiste em um indutor ($L$) em série e um capacitor ($C$) em paralelo com a carga ($R$). 
+O circuito do filtro passa-baixas consiste em um indutor ($L$) em série e um capacitor ($C$) em paralelo com a carga ($R$). 
 
 *(Circuito do Filtro Passa-Baixas)* 
 *![Circuito Passa-Baixas](passabaixas.png)*
@@ -44,11 +44,11 @@ $$H(j\omega) = \frac{\frac{R}{1 + j\omega C R}}{j\omega L + \frac{R}{1 + j\omega
 
 $$H(j\omega) = \frac{R}{j\omega L (1 + j\omega C R) + R} = \frac{R}{j\omega L + (j\omega)^2 L C R + R}$$
 
-Para obter a forma canônica, divide-se o numerador e o denominador por $R$:
+Para obter a forma padrão, dividimos o numerador e o denominador por $R$:
 
 $$H(j\omega) = \frac{R/R}{\frac{j\omega L}{R} + \frac{(j\omega)^2 L C R}{R} + \frac{R}{R}} = \frac{1}{1 + j\omega \frac{L}{R} + (j\omega)^2 L C}$$
 
-E, em seguida, divide-se os termos por $LC$:
+E, em seguida, dividimos os termos por $LC$:
 
 $$H(j\omega) = \frac{1/LC}{\frac{1}{LC} + j\omega \frac{L/R}{LC} + \frac{(j\omega)^2 LC}{LC}} = \frac{1/LC}{(j\omega)^2 + j\omega \frac{1}{CR} + 1/LC}$$
 
@@ -56,7 +56,7 @@ Comparando com a equação padrão do filtro passa-baixas de 2ª ordem:
 
 $$H(j\omega) = \frac{\omega_c^2}{(j\omega)^2 + \frac{\omega_c}{Q}(j\omega) + \omega_c^2}$$
 
-Extraem-se as seguintes relações para o Passa-Baixas:
+A partir disso, obtemos as seguintes relações para o Passa-Baixas:
 
 **1)** $\omega_c^2 = \frac{1}{LC} \Rightarrow \omega_c = \frac{1}{\sqrt{LC}}$
 
@@ -65,9 +65,9 @@ Extraem-se as seguintes relações para o Passa-Baixas:
 ---
 
 ### 2. Filtro Passa-Altas (Tweeter) - 2ª Ordem
-A topologia do filtro passa-altas utiliza um capacitor ($C$) em série e um indutor ($L$) em paralelo com a carga ($R$).
+O circuito do filtro passa-altas utiliza um capacitor ($C$) em série e um indutor ($L$) em paralelo com a carga ($R$).
 
-  *(Circuito do Filtro Passa-Altas)* *![Circuito Passa-Altas](passaaltas.png)*
+*(Circuito do Filtro Passa-Altas)* *![Circuito Passa-Altas](passaaltas.png)*
 
 A impedância do ramo paralelo ($Z_p$) formado pelo indutor e a carga é:
 
@@ -85,11 +85,11 @@ $$H(j\omega) = \frac{j\omega L R}{\frac{j\omega L + R}{j\omega C} + j\omega L R}
 
 $$H(j\omega) = \frac{(j\omega)^2 L C R}{R + j\omega L + (j\omega)^2 L C R}$$
 
-Dividindo o numerador e o denominador por $R$:
+Para obter a forma padrão, dividimos o numerador e o denominador por $R$:
 
 $$H(j\omega) = \frac{(j\omega)^2 L C}{1 + j\omega \frac{L}{R} + (j\omega)^2 L C}$$
 
-E, posteriormente, dividindo por $LC$:
+E, em seguida, dividimos os termos por $LC$:
 
 $$H(j\omega) = \frac{(j\omega)^2}{\frac{1}{LC} + j\omega \frac{1}{CR} + (j\omega)^2} = \frac{(j\omega)^2}{(j\omega)^2 + j\omega \frac{1}{CR} + 1/LC}$$
 
@@ -97,7 +97,7 @@ Comparando com a forma padrão do filtro passa-altas de 2ª ordem:
 
 $$H(j\omega) = \frac{(j\omega)^2}{(j\omega)^2 + \frac{\omega_c}{Q}(j\omega) + \omega_c^2}$$
 
-Verifica-se que as relações extraídas são idênticas às do Passa-Baixas:
+A partir disso, obtemos relações idênticas às do Passa-Baixas:
 
 **1)** $\omega_c^2 = \frac{1}{LC} \Rightarrow \omega_c = \frac{1}{\sqrt{LC}}$
 
@@ -106,7 +106,7 @@ Verifica-se que as relações extraídas são idênticas às do Passa-Baixas:
 ---
 
 ### 3. Fórmulas de Projeto (Cálculo de L e C)
-Conforme demonstrado pelas deduções algébricas, as equações características para os componentes são as mesmas para ambas as topologias. Sabendo que em um filtro Butterworth o fator de qualidade é $Q = \frac{\sqrt{2}}{2}$:
+Conforme demonstrado pelas deduções algébricas, as equações características para os componentes são as mesmas para ambos os circuitos. Sabendo que em um filtro Butterworth o fator de qualidade é $Q = \frac{\sqrt{2}}{2}$:
 
 **Cálculo do Capacitor ($C$):**
 Substituindo $Q$ na relação $C = \frac{Q}{\omega_c R}$:
