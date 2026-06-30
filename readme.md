@@ -125,11 +125,11 @@ $$L = \frac{R}{\omega_c \left(\frac{\sqrt{2}}{2}\right)} = \frac{2R}{\sqrt{2} \o
 
 ## Lógica do Programa
 O programa desenvolvido para o projeto tem a seguinte lógica:
-1. **Entrada:** Recebe os valores especificados de Impedância ($R$) e Frequência de Corte ($f_c$).
-2. **Cálculo:** Utiliza as fórmulas matemáticas deduzidas para encontrar os valores ideais exatos de $L$ e $C$.
-3. **Aproximação:** Compara os valores ideais com uma lista de componentes comerciais e seleciona os mais próximos.
-4. **Análise de Erro:** Calcula a nova frequência de corte com base nas peças reais e verifica a diferença percentual.
-5. **Plotagem:** Gera as funções de transferência e plota os Gráficos de Bode comparativos (Curva Ideal vs. Curva Real).
+1. Entrada: Recebe os valores especificados de Impedância ($R$) e Frequência de Corte ($f_c$).
+2. Cálculo: Utiliza as fórmulas matemáticas deduzidas para encontrar os valores ideais exatos de $L$ e $C$.
+3. Aproximação: Compara os valores ideais com uma lista de componentes comerciais e seleciona os mais próximos.
+4. Análise de Erro: Calcula a nova frequência de corte com base nas peças reais e verifica a diferença percentual.
+5. Plotagem: Gera as funções de transferência e plota os Gráficos de Bode comparativos (Curva Ideal vs. Curva Real).
 
 ## Como Executar o Código
 
@@ -144,14 +144,14 @@ Abaixo, o comparativo considerando os cálculos para $R$ = 8 Ω e $f_c$ = 2000 H
 * Para o **Capacitor ($C$)**, o valor ideal era 7.030 µF, e o comercial usado foi 6.800 µF (erro de 3.27%).
 * Com essa troca de peças, a **Frequência de Corte ($f_c$)** real do circuito mudou de 2000 Hz para 2129.57 Hz (erro de 6.48%).
 
-*(Gráfico gerado pelo código comparando a resposta Ideal vs. Real)* ![Gráfico de Bode Passa-Baixas](Imagens/bode1.png) ![Gráfico de Bode Passa-Baixas](Imagens/bode2.png)
+*(Gráfico gerado pelo código comparando a resposta Ideal vs Real)* ![Gráfico de Bode Passa-Baixas](Imagens/bode1.png) ![Gráfico de Bode Passa-Baixas](Imagens/bode2.png)
 
 ## Análise Crítica
-O principal desafio prático na montagem de filtros passivos é que os valores teóricos raramente estão disponíveis para compra. Conforme quantificado na seção anterior, o arredondamento para os componentes padronizados deslocou a nossa frequência de corte em aproximadamente 130 Hz (de 2000 Hz para 2129.57 Hz).
+O principal desafio prático na montagem de filtros passivos é que os valores teóricos raramente estão disponíveis para compra. O arredondamento para os componentes padronizados deslocou a nossa frequência de corte em aproximadamente 130 Hz (de 2000 Hz para 2129.57 Hz).
 
-Em um sistema de áudio, no entanto, qual o impacto prático dessa mudança? Essa diferença não chega a comprometer o funcionamento e **não seria audível**. A alteração ocorre em uma faixa muito estreita na região de transição. Além disso, as próprias variações de fabricação e as curvas de resposta naturais dos alto-falantes ajudam a mascarar completamente esses pequenos desvios do filtro no mundo real.
+Em um sistema físico, essa diferença não chega a ser audível nem compromete o funcionamento. O pequeno desvio na banda de transição acaba sendo mascarado pelas próprias tolerâncias de projeto e pela resposta natural dos alto-falantes.
 
 ## Conclusões
-O projeto atingiu seu objetivo fundamental com sucesso. Foi possível estruturar, equacionar e validar os filtros Butterworth de 2ª ordem a partir da análise matemática de circuitos e da simulação. 
+O projeto atingiu seu objetivo. Foi possível estruturar, equacionar e validar os filtros Butterworth de 2ª ordem a partir da análise matemática de circuitos e da simulação. 
 
-A etapa prática trouxe o maior desafio do projeto: adaptar números matematicamente perfeitos à limitação física das peças eletrônicas. Essa limitação ensinou uma lição valiosa sobre a engenharia do mundo real, mostrando que um bom projeto não é aquele que usa números impossíveis, mas sim aquele que sabe utilizar peças padronizadas de mercado garantindo que a qualidade e a funcionalidade do sistema permaneçam intactas.
+Na prática, o desafio do projeto foi a adequação dos componentes. A análise mostrou que o uso de valores comerciais, em vez dos calculados teoricamente, causa somente uma pequena variação na frequência de corte.
