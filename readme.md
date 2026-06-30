@@ -9,7 +9,7 @@ Para fazer essa separação, projetei e implementei dois filtros de 2ª ordem co
 * **Filtro Passa-Altas (HPF):** Deixa passar os sinais agudos e manda para o tweeter.
 
 ## Especificações e Objetivos do Projeto
-O objetivo prático é dimensionar os componentes ideais e comerciais para que o divisor de frequências atue na faixa desejada. Os parâmetros base usados para o cálculo foram:
+O objetivo prático é dimensionar os componentes teóricos e comerciais para que o divisor de frequências atue na faixa desejada. Os parâmetros base usados para o cálculo foram:
 * **Frequência de Corte ($f_c$):** 2000 Hz
 * **Impedância de Carga ($R$):** 8 Ω
 * **Fator de Qualidade ($Q$):** $\frac{\sqrt{2}}{2} \approx 0.7071$ (característico do filtro Butterworth).
@@ -119,6 +119,7 @@ Substituindo a fórmula de $C$ que achamos antes:
 $$L = \frac{1}{\omega_c^2 \left(\frac{Q}{\omega_c R}\right)} = \frac{R}{\omega_c Q}$$
 
 Substituindo o valor de $Q = \frac{\sqrt{2}}{2}$:
+
 $$L = \frac{R}{\omega_c \left(\frac{\sqrt{2}}{2}\right)} = \frac{2R}{\sqrt{2} \omega_c} \Rightarrow L = \frac{\sqrt{2} R}{\omega_c}$$
 
 ---
@@ -126,25 +127,25 @@ $$L = \frac{R}{\omega_c \left(\frac{\sqrt{2}}{2}\right)} = \frac{2R}{\sqrt{2} \o
 ## Lógica do Programa
 O programa desenvolvido para o projeto tem a seguinte lógica:
 1. Entrada: Recebe os valores especificados de Impedância ($R$) e Frequência de Corte ($f_c$).
-2. Cálculo: Utiliza as fórmulas matemáticas deduzidas para encontrar os valores ideais exatos de $L$ e $C$.
-3. Aproximação: Compara os valores ideais com uma lista de componentes comerciais e seleciona os mais próximos.
+2. Cálculo: Utiliza as fórmulas matemáticas deduzidas para encontrar os valores teóricos exatos de $L$ e $C$.
+3. Aproximação: Compara os valores teóricos com uma lista de componentes comerciais e seleciona os mais próximos.
 4. Análise de Erro: Calcula a nova frequência de corte com base nas peças reais e verifica a diferença percentual.
-5. Plotagem: Gera as funções de transferência e plota os Gráficos de Bode comparativos (Curva Ideal vs. Curva Real).
+5. Plotagem: Gera as funções de transferência e plota os Gráficos de Bode comparativos (Curva Teórica vs. Curva Real).
 
 ## Como Executar o Código
 
 1. Ter o MATLAB e a Toolbox Control System Toolbox instalados.
 2. Baixe os arquivos deste repositório.
-3. Rode o código. Insira a Frequência de Corte e a Impedância da Carga pedidas pelo programa. O terminal imprimirá os valores ideais, os valores comerciais adotados e o erro percentual. Em seguida, a janela com os Gráficos de Bode se abrirá na tela. São duas abas, uma para cada filtro.
+3. Rode o código. Insira a Frequência de Corte e a Impedância da Carga pedidas pelo programa. O terminal imprimirá os valores teóricos, os valores comerciais adotados e o erro percentual. Em seguida, a janela com os Gráficos de Bode se abrirá na tela. São duas abas, uma para cada filtro.
 
 ## Análise dos Resultados
 Abaixo, o comparativo considerando os cálculos para $R$ = 8 Ω e $f_c$ = 2000 Hz:
 
-* Para o **Indutor ($L$)**, o valor ideal calculado foi de 0.900 mH, mas o comercial mais próximo escolhido foi de 0.820 mH (erro de 8.89%).
-* Para o **Capacitor ($C$)**, o valor ideal era 7.030 µF, e o comercial usado foi 6.800 µF (erro de 3.27%).
+* Para o **Indutor ($L$)**, o valor teórico calculado foi de 0.900 mH, mas o comercial mais próximo escolhido foi de 0.820 mH (erro de 8.89%).
+* Para o **Capacitor ($C$)**, o valor teórico era 7.030 µF, e o comercial usado foi 6.800 µF (erro de 3.27%).
 * Com essa troca de peças, a **Frequência de Corte ($f_c$)** real do circuito mudou de 2000 Hz para 2129.57 Hz (erro de 6.48%).
 
-*(Gráfico gerado pelo código comparando a resposta Ideal vs Real)* ![Gráfico de Bode Passa-Baixas](Imagens/bode1.png) ![Gráfico de Bode Passa-Baixas](Imagens/bode2.png)
+*(Gráfico gerado pelo código comparando a resposta Teórica vs Real)* ![Gráfico de Bode Passa-Baixas](Imagens/bode1.png) ![Gráfico de Bode Passa-Altas](Imagens/bode2.png)
 
 ## Análise Crítica
 O principal desafio prático na montagem de filtros passivos é que os valores teóricos raramente estão disponíveis para compra. O arredondamento para os componentes padronizados deslocou a nossa frequência de corte em aproximadamente 130 Hz (de 2000 Hz para 2129.57 Hz).
