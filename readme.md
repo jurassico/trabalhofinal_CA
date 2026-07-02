@@ -37,7 +37,7 @@ Aplicando a regra do divisor de tensão, a função de transferência $H(j\omega
 
 $$H(j\omega) = \frac{V_{saida}}{V_{entrada}} = \frac{Z_p}{Z_L + Z_p}$$
 
-Substituindo $Z_p$ e $Z_L$ e dando uma ajeitada na equação:
+Substituindo $Z_p$ e $Z_L$ e manipulando a equação:
 
 $$H(j\omega) = \frac{\frac{R}{1 + j\omega C R}}{j\omega L + \frac{R}{1 + j\omega C R}} \cdot \left(\frac{1 + j\omega C R}{1 + j\omega C R}\right)$$
 
