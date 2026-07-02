@@ -105,7 +105,7 @@ A partir disso, obtemos relações idênticas às do Passa-Baixas:
 ---
 
 ### 3. Fórmulas de Projeto (Cálculo de L e C)
-Como deu para ver nas contas ali em cima, as equações dos componentes são as mesmas para os dois circuitos. Sabendo que em um filtro Butterworth o fator de qualidade é $Q = \frac{\sqrt{2}}{2}$:
+Os circuitos compartilham as mesmas equações de componentes. Sabendo que em um filtro Butterworth o fator de qualidade é $Q = \frac{\sqrt{2}}{2}$:
 
 **Cálculo do Capacitor ($C$):**
 Substituindo $Q$ na relação $C = \frac{Q}{\omega_c R}$:
